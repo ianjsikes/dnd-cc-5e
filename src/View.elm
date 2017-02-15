@@ -1,9 +1,11 @@
 module View exposing (..)
 
-import Html exposing (Html, div, img, text)
-import Messages exposing (Msg)
+import Html exposing (Html, div, img, button, text)
+import Html.Events exposing (onClick)
+import Messages exposing (Msg(..))
 import Models exposing (Model)
 import Routing exposing (Route(..))
+import Character.Overview
 
 
 view : Model -> Html Msg
@@ -18,6 +20,9 @@ page model =
         HomeRoute ->
             homePage model
 
+        OverviewRoute ->
+            Html.map CharacterMsg (Character.Overview.view model.character)
+
         NotFoundRoute ->
             notFoundView
 
@@ -25,10 +30,14 @@ page model =
 homePage : Model -> Html Msg
 homePage model =
     div []
-        [ text model.message ]
+        [ text model.message
+        , button [ onClick ShowOverview ]
+            [ text "Overview" ]
+        ]
 
 
 notFoundView : Html Msg
 notFoundView =
     div []
-        [ text "Not found" ]
+        [ text "Not found"
+        ]

@@ -1,8 +1,10 @@
 module Messages exposing (..)
 
 import Navigation exposing (Location)
+import Character.Messages
 
 
 type Msg
-    = NoOp
+    = CharacterMsg Character.Messages.Msg
+    | ShowOverview
     | OnLocationChange Location
